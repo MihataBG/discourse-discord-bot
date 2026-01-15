@@ -373,6 +373,20 @@ module ::DiscordBot::BotCommands
       end
     end
 
+    bot.event(:interaction_create) do |event|
+      i = event.interaction
+      next unless i&.type == 2
+      next unless i.data["name"] == "disccopy"
+
+      i.defer(ephemeral: true)
+
+      # тук по-късно ще извикаш съществуващата логика
+      i.send_message(
+        content: "🚧 disccopy via interaction – WIP",
+        ephemeral: true
+      )
+    end
+
     bot.run
   end
 end
